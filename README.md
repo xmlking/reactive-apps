@@ -1,13 +1,15 @@
 Reactive Apps
 =============
-This demo application showcases end-to-end `Functional Reactive Programming (FRP)` using the following technology stack:
+This demo application showcases end-to-end `Functional Reactive Programming (FRP)` with Spring 5.
+
+##### Technology stack
 * Spring Framework 5
 * Spring Boot 2.0.0
 * Spring WebFlux
 * Embedded MongoDB
 * Reactive MongoDB Driver
 
-Highlights of this application are:
+##### Highlights
 * Use of Server-Sent Events (SSE) rendered in HTML by Thymeleaf from a reactive data stream.
 * Use of Server-Sent Events (SSE) rendered in JSON by Spring WebFlux from a reactive data stream. 
 * Use of Spring Data MongoDB's reactive (Reactive Streams) driver support.
@@ -24,7 +26,7 @@ Highlights of this application are:
 ### Running
 > use `./gradlew` instead of `gradle` if you didn't installed `gradle`
 
-Start all 3 apps: [mongo-data-service](./mongo-data-service), [stream-service](./stream-service), [ui-app](./stream-service)
+Start all 3 apps: [mongo-data-service](./mongo-data-service), [stream-service](./stream-service), [ui-app](./ui-app)
 
 ### Testing
 ```bash

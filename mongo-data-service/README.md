@@ -27,8 +27,13 @@ gradle :mongo-data-service:build
 
 ### API
 http://localhost:8081/api/events
+
 http://localhost:8081/api/events/mixit12
+
 http://localhost:8081/api/users
+
 http://localhost:8081/api/users/pamelafox
+
 http://localhost:8081/api/staff
+
 http://localhost:8081/api/staff/sdeleuze
