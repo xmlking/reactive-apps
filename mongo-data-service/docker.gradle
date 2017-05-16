@@ -1,0 +1,13 @@
+docker {
+    name "${group}/${jar.baseName}:${jar.version}"
+    // tags 'latest'
+    // files tasks.jar.outputs, 'src/main/docker/jce_policy-8.zip', 'src/main/docker/.ssl/truststore.jks'
+    files tasks.jar.outputs
+    dockerfile file('src/main/docker/Dockerfile')
+    buildArgs([
+            PORT     : '8081',
+            JAVA_OPTS: '-Xms512m -Xmx1024m'
+    ])
+    pull true
+    dependsOn tasks.build
+}

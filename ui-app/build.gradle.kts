@@ -2,6 +2,7 @@ val kotlinVersion by project
 val springBootVersion by project
 val reactorKotlinExtensions by project
 val springDependencyManagement by project
+val dockerPluginVersion by project
 
 buildscript {
     val kotlinVersion = "1.1.2-2"
@@ -20,17 +21,20 @@ buildscript {
 
 apply {
     plugin("org.springframework.boot")
+    from("docker.gradle")
 }
 
 plugins {
     val kotlinVersion = "1.1.2-2"
     val springDependencyManagement = "1.0.2.RELEASE"
+    val dockerPluginVersion = "0.13.0"
 
     id("org.jetbrains.kotlin.jvm") version kotlinVersion
     id("org.jetbrains.kotlin.plugin.spring") version kotlinVersion
     id("org.jetbrains.kotlin.plugin.noarg") version kotlinVersion
 //    id("org.jetbrains.kotlin.plugin.jpa"") version kotlinVersion
     id("io.spring.dependency-management") version springDependencyManagement
+    id("com.palantir.docker") version dockerPluginVersion
 }
 
 noArg {

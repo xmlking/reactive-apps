@@ -24,6 +24,8 @@ gradle :ui-app:test
 ### Building 
 ```bash
 gradle :ui-app:build
+# build docker image
+gradle :ui-app:docker
 ```
 
 ### App

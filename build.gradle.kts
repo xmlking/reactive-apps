@@ -22,7 +22,7 @@ apply {
 }
 
 allprojects {
-    group = "org.xmlking.mapr"
+    group = "reactive"
     version = version
 
     repositories {

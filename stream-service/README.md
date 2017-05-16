@@ -23,6 +23,8 @@ gradle :stream-service:test
 ### Building 
 ```bash
 gradle :stream-service:build
+# build docker image
+gradle :stream-service:docker
 ```
 
 ### API

@@ -1,0 +1,11 @@
+docker {
+    name "${group}/${jar.baseName}:${jar.version}"
+    files tasks.jar.outputs
+    dockerfile file('src/main/docker/Dockerfile')
+    buildArgs([
+            PORT     : '8080',
+            JAVA_OPTS: '-Xms64m -Xmx128m'
+    ])
+    pull true
+    dependsOn tasks.build
+}
