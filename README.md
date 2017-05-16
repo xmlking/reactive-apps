@@ -25,6 +25,7 @@ This demo application showcases end-to-end `Functional Reactive Programming (FRP
 
 ### Running
 Start all 3 apps: [mongo-data-service](./mongo-data-service), [stream-service](./stream-service), [ui-app](./ui-app)
+
 You can also build and run as Docker images as per instructions in respective README.md files. 
  
 ### Testing
