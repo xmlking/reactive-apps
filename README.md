@@ -24,15 +24,14 @@ This demo application showcases end-to-end `Functional Reactive Programming (FRP
 
 
 ### Running
-> use `./gradlew` instead of `gradle` if you didn't installed `gradle`
-
 Start all 3 apps: [mongo-data-service](./mongo-data-service), [stream-service](./stream-service), [ui-app](./ui-app)
-
+You can also build and run as Docker images as per instructions in respective README.md files. 
+ 
 ### Testing
 ```bash
 gradle test
 ```
-### Building 
+### Building
 ```bash
 gradle build
 ```
@@ -46,4 +45,7 @@ gradle --status
 gradle --stop
 ```
 
+### Credits
+* [MiXiT](https://github.com/mixitconf/mixit)
+* [Stéphane Nicoll](https://github.com/snicoll-demos/demo-webflux-streaming)
 
