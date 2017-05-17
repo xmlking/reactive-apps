@@ -23,19 +23,40 @@ This demo application showcases end-to-end `Functional Reactive Programming (FRP
 * Docker deployment
 
 
-### Running
-Start all 3 apps: [mongo-data-service](./mongo-data-service), [stream-service](./stream-service), [ui-app](./ui-app)
+### Building
+```bash
+# build all 3 executable jars
+gradle build
+# build all 3 docker images
+gradle docker
+```
 
-You can also build and run as Docker images as per instructions in respective README.md files. 
- 
 ### Testing
 ```bash
 gradle test
 ```
-### Building
+
+### Running
+##### Manual 
+Start all 3 apps: [mongo-data-service](./mongo-data-service), [stream-service](./stream-service), [ui-app](./ui-app)
+##### Docker
+You can also build Docker images and run all via `Docker Compose`
 ```bash
-gradle build
+# start containers in the background
+docker-compose up -d
+# start containers in the foreground
+docker-compose up 
+# show runnning containers 
+docker-compose ps
+# scaling containers and load balancing
+docker-compose scale stream=3
+# 1. stop the running containers using
+docker-compose stop
+# 2. remove the stopped containers using
+docker-compose rm -f
 ```
+>Access UI App at http://localhost:8080
+
 
 ### Gradle Commands
 ```bash
