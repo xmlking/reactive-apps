@@ -1,9 +1,9 @@
-FROM openjdk:alpine
+FROM openjdk:8
 MAINTAINER "Sumanth Chinthagunta"
 
 ARG JAVA_OPTS
 ARG PORT
-VOLUME /tmp
+#VOLUME /tmp
 RUN mkdir /app
 ADD mongo-data-service-0.1.0-SNAPSHOT.jar /app/app.jar
 RUN touch /app/app.jar

@@ -24,7 +24,7 @@ gradle :mongo-data-service:test
 ```bash
 gradle :mongo-data-service:build
 # build docker image
-gradle :mongo-data-service:docker -x test
+gradle :mongo-data-service:docker
 ```
 
 ### API
