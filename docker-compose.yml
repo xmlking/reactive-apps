@@ -1,21 +1,14 @@
 version: '2'
 services:
   mongo:
-    container_name: mongo-data-service
     image: reactive/mongo-data-service:0.1.0-SNAPSHOT
-    ports:
-      - 8081:8081
     networks:
       - reactive-network
   stream:
-    container_name: stream-service
     image: reactive/stream-service:0.1.0-SNAPSHOT
-    ports:
-      - 8082:8082
     networks:
       - reactive-network
   app:
-    container_name: ui-app
     image: reactive/ui-app:0.1.0-SNAPSHOT
     ports:
       - 8080:8080

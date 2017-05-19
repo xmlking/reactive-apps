@@ -51,7 +51,7 @@ docker-compose up
 # show runnning containers 
 docker-compose ps
 # scaling containers and load balancing
-docker-compose scale stream=3
+docker-compose scale stream=2
 # 1. stop the running containers using
 docker-compose stop
 # 2. remove the stopped containers using
