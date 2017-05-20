@@ -6,7 +6,7 @@ val dockerPluginVersion by project
 
 buildscript {
     val kotlinVersion = "1.1.2-2"
-    val springBootVersion = "2.0.0.BUILD-SNAPSHOT"
+    val springBootVersion = "2.0.0.M1"
 
     repositories {
         mavenCentral()
