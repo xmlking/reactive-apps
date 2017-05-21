@@ -10,7 +10,6 @@ buildscript {
 
     repositories {
         mavenCentral()
-        maven { setUrl("https://repo.spring.io/snapshot") }
         maven { setUrl("https://repo.spring.io/milestone") }
     }
     dependencies {
@@ -42,7 +41,7 @@ noArg {
 }
 
 dependencies {
-    compile(kotlinModule("stdlib"))
+    compile(kotlinModule("stdlib-jre8"))
     compile(kotlinModule("reflect"))
 
     compile(project(":commons"))

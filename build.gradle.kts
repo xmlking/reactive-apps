@@ -29,7 +29,6 @@ allprojects {
         gradleScriptKotlin()
         mavenCentral()
         maven { setUrl("https://repo.spring.io/milestone") }
-        maven { setUrl("https://repo.spring.io/snapshot") }
     }
 }
 

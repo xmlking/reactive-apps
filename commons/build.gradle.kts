@@ -9,7 +9,6 @@ buildscript {
 
     repositories {
         mavenCentral()
-        maven { setUrl("https://repo.spring.io/snapshot") }
         maven { setUrl("https://repo.spring.io/milestone") }
     }
     dependencies {
@@ -29,10 +28,10 @@ plugins {
 }
 
 noArg {
-    annotation("com.example.Quote")
+    annotation("org.springframework.data.mongodb.core.mapping.Document")
 }
 
 dependencies {
-    compile(kotlinModule("stdlib"))
+    compile(kotlinModule("stdlib-jre8"))
     compile(kotlinModule("reflect"))
 }
