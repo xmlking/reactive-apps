@@ -27,7 +27,8 @@ $ docker run -e "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,address=5005,serve
 docker ps
 # To stop a running container
 docker stop 81c723d22865
-
+# SSH to the running container (CONTAINER ID from `docker ps` command)
+docker exec -i <CONTAINER ID> sh
 ```
 
 ##### Docker Compose
