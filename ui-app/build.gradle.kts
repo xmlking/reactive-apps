@@ -1,41 +1,19 @@
-val kotlinVersion by project
-val springBootVersion by project
 val reactorKotlinExtensions by project
-val springDependencyManagement by project
-val dockerPluginVersion by project
-
-buildscript {
-    val kotlinVersion = "1.1.2-2"
-    val springBootVersion = "2.0.0.M1"
-
-    repositories {
-        mavenCentral()
-        maven { setUrl("https://repo.spring.io/milestone") }
-    }
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion")
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
-    }
-}
 
 apply {
     plugin("org.springframework.boot")
+    plugin("org.jetbrains.kotlin.jvm")
+    plugin("org.jetbrains.kotlin.plugin.spring")
+//    plugin("org.jetbrains.kotlin.plugin.noarg")
+//    plugin("org.jetbrains.kotlin.plugin.jpa")
+    plugin("io.spring.dependency-management")
+    plugin("com.palantir.docker")
     from("docker.gradle")
 }
 
 plugins {
-    val kotlinVersion = "1.1.2-2"
-    val springDependencyManagement = "1.0.2.RELEASE"
-    val dockerPluginVersion = "0.13.0"
-
-    id("org.jetbrains.kotlin.jvm") version kotlinVersion
-    id("org.jetbrains.kotlin.plugin.spring") version kotlinVersion
-    id("org.jetbrains.kotlin.plugin.noarg") version kotlinVersion
-//    id("org.jetbrains.kotlin.plugin.jpa"") version kotlinVersion
-    id("io.spring.dependency-management") version springDependencyManagement
-    id("com.palantir.docker") version dockerPluginVersion
+    id("org.jetbrains.kotlin.plugin.noarg") version "1.1.2-2"
 }
-
 noArg {
     annotation("org.springframework.data.mongodb.core.mapping.Document")
 }
