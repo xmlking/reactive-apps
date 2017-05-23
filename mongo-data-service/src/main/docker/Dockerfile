@@ -1,11 +1,12 @@
 FROM openjdk:8
 MAINTAINER "Sumanth Chinthagunta"
 
+ARG JAR_NAME
 ARG JAVA_OPTS
 ARG PORT
 #VOLUME /tmp
 WORKDIR /app
-ADD mongo-data-service-0.1.0-SNAPSHOT.jar app.jar
+ADD $JAR_NAME app.jar
 RUN touch app.jar
 EXPOSE $PORT
 ENV PORT=$PORT

@@ -5,6 +5,7 @@ docker {
     files tasks.jar.outputs
     dockerfile file('src/main/docker/Dockerfile')
     buildArgs([
+            JAR_NAME : jar.archiveName,
             PORT     : '8081',
             JAVA_OPTS: '-Xms512m -Xmx1024m'
     ])
