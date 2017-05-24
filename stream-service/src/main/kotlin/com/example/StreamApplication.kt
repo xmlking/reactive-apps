@@ -55,11 +55,11 @@ class QuoteHandler(val quoteGenerator: QuoteGenerator) {
 
     fun fetchFibonacciSSE(req: ServerRequest) = ok()
             .contentType(TEXT_EVENT_STREAM)
-            .body(quoteGenerator.fibonacci.toFlux().take(10)  , String::class.java)
+            .body(quoteGenerator.fibonacci.toFlux().take(10), String::class.java)
 
     fun fetchFibonacci(req: ServerRequest) = ok()
             .contentType(APPLICATION_STREAM_JSON)
-            .body(quoteGenerator.fibonacci.toFlux()  , String::class.java)
+            .body(quoteGenerator.fibonacci.toFlux(), String::class.java)
 }
 
 @Component
