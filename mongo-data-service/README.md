@@ -39,3 +39,5 @@ http://localhost:8081/api/users/pamelafox
 http://localhost:8081/api/staff
 
 http://localhost:8081/api/staff/sdeleuze
+
+http://localhost:8081/api/guestbook

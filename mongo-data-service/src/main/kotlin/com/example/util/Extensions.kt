@@ -40,6 +40,9 @@ inline fun <reified T : Any> ReactiveMongoOperations.findById(id: Any): Mono<T> 
 inline fun <reified T : Any> ReactiveMongoOperations.find(query: Query): Flux<T> =
         find(query, T::class.java)
 
+inline fun <reified T : Any> ReactiveMongoOperations.tail(query: Query): Flux<T> =
+        tail(query, T::class.java)
+
 inline fun <reified T : Any> ReactiveMongoOperations.findAll(): Flux<T> =
         findAll(T::class.java)
 

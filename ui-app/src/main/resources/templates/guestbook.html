@@ -18,30 +18,30 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/quotes">Quotes</a></li>
-                <li><a href="/guestbook">GuestBook</a></li>
+                <li class="active"><a href="/guestbook">GuestBook</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="container wrapper">
-    <h2>Staff</h2>
+    <h2>GuestBook</h2>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Login</th>
+            <th>Id</th>
+            <th>Date</th>
             <th>Name</th>
-            <th>Email</th>
-            <th>Company</th>
+            <th>Comment</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user: ${users}">
-            <td th:text="${user.login}">sumo</td>
-            <th th:text="${user.firstname + ' ' + user.lastname}">Jane Doe</th>
-            <th th:text="${user.email}">dumo@demo.com</th>
-            <td th:text="${user.company}">XYZ</td>
+        <tr th:each="entry: ${entries}">
+            <td th:text="${entry.id}">Id</td>
+            <th th:text="${entry.date}">Some Date</th>
+            <th th:text="${entry.name}">Sumo</th>
+            <td th:text="${entry.text}">my comment</td>
         </tr>
         </tbody>
     </table>
@@ -55,5 +55,23 @@
        <!--console.log('data',data)-->
     <!--});-->
 <!--</script>-->
+<script>
+    var source = new EventSource("/guestbook/feed");
+    source.addEventListener('message', function(e) {
+        console.log('data', JSON.parse(e.data))
+    }, false);
+
+    source.addEventListener('open', function(e) {
+        console.log('Connection was opened.', e)
+    }, false);
+
+    source.addEventListener('error', function(e) {
+        if (e.readyState === EventSource.CLOSED) {
+            console.log('Connection was closed.');
+        }
+        console.log('error:::', e);
+    }, false);
+
+</script>
 </body>
 </html>

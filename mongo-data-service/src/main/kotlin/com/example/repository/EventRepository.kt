@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.stereotype.Repository
+import reactor.core.publisher.Mono
 
 @Repository
 class EventRepository(val template: ReactiveMongoTemplate,
@@ -35,5 +36,7 @@ class EventRepository(val template: ReactiveMongoTemplate,
     fun deleteAll() = template.remove<Event>(Query())
 
     fun save(event: Event) = template.save(event)
+
+    fun save(user: Mono<User>) = template.save(user)
 
 }

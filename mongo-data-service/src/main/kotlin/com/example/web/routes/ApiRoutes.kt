@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.server.router
 
 @Configuration
 class ApiRoutes(val eventHandler: EventHandler,
+                val guestBookHandler: GuestBookHandler,
                 val userHandler: UserHandler) {
     @Bean
     @DependsOn("databaseInitializer")
@@ -33,6 +34,18 @@ class ApiRoutes(val eventHandler: EventHandler,
                 GET("/{login}", userHandler::findOneStaff)
             }
 
+            // guest book
+            "/guestbook".nest {
+                GET("/", guestBookHandler::findAll)
+                POST("/", guestBookHandler::create)
+                GET("/{id}", guestBookHandler::findOne)
+            }
+
+        }
+
+        GET("/sse/guestbook").nest {
+            accept(TEXT_EVENT_STREAM, guestBookHandler::fetchSSE)
+            accept(APPLICATION_STREAM_JSON, guestBookHandler::fetch)
         }
     }
 }

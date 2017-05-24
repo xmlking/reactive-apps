@@ -53,6 +53,33 @@ class MainController(@Value("\${app.mongoApiUrl}") val mongoApiUrl: String,
 				.log()
 	}
 
+	@GetMapping("/guestbook")
+	fun guestBook(model: Model): String {
+		val entryList = WebClient.create(mongoApiUrl)
+				.get()
+				.uri("api/guestbook")
+				.accept(MediaType.APPLICATION_JSON)
+				.retrieve()
+				.bodyToFlux(GuestBookEntryDto::class.java)
+				.log()
+
+		model.addAttribute("entries", ReactiveDataDriverContextVariable(entryList, 1))
+		return "guestbook"
+	}
+
+    @GetMapping(path = arrayOf("/guestbook/feed"), produces = arrayOf(MediaType.TEXT_EVENT_STREAM_VALUE))
+    @ResponseBody
+    fun guestBookStream(): Flux<GuestBookEntryDto> {
+        return WebClient.create(mongoApiUrl)
+                .get()
+                .uri("/sse/guestbook")
+                .accept(MediaType.APPLICATION_STREAM_JSON)
+                .retrieve()
+                .bodyToFlux(GuestBookEntryDto::class.java)
+                .share()
+                .log()
+    }
+
 }
 
 
