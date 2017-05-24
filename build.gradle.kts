@@ -8,16 +8,13 @@ val springDependencyManagement by project
 val dockerPluginVersion by project
 
 buildscript {
-    val kotlinVersion = "1.1.2-2"
     val springBootVersion = "2.0.0.M1"
 
     repositories {
-        gradleScriptKotlin()
         mavenCentral()
         maven { setUrl("https://repo.spring.io/milestone") }
     }
     dependencies {
-        classpath(kotlinModule("gradle-plugin"))
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
     }
 }
@@ -45,7 +42,6 @@ allprojects {
     version = version
 
     repositories {
-        gradleScriptKotlin()
         mavenCentral()
         maven { setUrl("https://repo.spring.io/milestone") }
     }

@@ -1,6 +1,6 @@
 Docker
 ======
-Docker basic commands.
+Docker Cheat Sheet.
 
 ### Install
 Install `Docker for Mac` app

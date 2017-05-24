@@ -10,6 +10,7 @@ A simple demo application showcases end-to-end `Functional Reactive Programming 
 * Spring WebFlux
 * Embedded MongoDB
 * Reactive MongoDB Driver
+* Gradle 4
 
 ##### Highlights
 * Use of Server-Sent Events (SSE) rendered in HTML by Thymeleaf from a reactive data stream.
@@ -24,6 +25,12 @@ A simple demo application showcases end-to-end `Functional Reactive Programming 
 * Cross-Origin Resource Sharing (CORS)
 * Docker deployment
 
+
+### Prerequisites
+* Gradle 4
+> Recommended to install Gradle with [sdkman](http://sdkman.io)
+
+> use `./gradlew` instead of `gradle` until 4.0 is released.
 
 ### Building
 ```bash
@@ -64,7 +71,7 @@ docker-compose rm -f
 ```bash
 # upgrade project gradle version
 gradle wrapper --gradle-version 3.5
-gradle wrapper --gradle-distribution-url https://repo.gradle.org/gradle/dist-snapshots/gradle-script-kotlin-4.0-20170518042627+0000-all.zip
+gradle wrapper --gradle-distribution-url https://repo.gradle.org/gradle/dist-snapshots/gradle-script-kotlin-4.0-20170523130707+0000-all.zip
 # gradle daemon status 
 gradle --status
 gradle --stop
