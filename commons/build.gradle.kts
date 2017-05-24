@@ -1,7 +1,6 @@
 val reactorKotlinExtensions by project
 
 apply {
-    plugin("org.springframework.boot")
     plugin("org.jetbrains.kotlin.jvm")
     plugin("org.jetbrains.kotlin.plugin.spring")
 //    plugin("org.jetbrains.kotlin.plugin.noarg")
