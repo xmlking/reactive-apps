@@ -29,9 +29,10 @@ gradle :stream-service:docker
 
 ### API
 http://localhost:8082/sse/quotes
+http://localhost:8082/sse/fibonacci
 
 ### Test testing tool for socket.io
 
 http://amritb.github.io/socketio-client-tool/
 
-Connect URL: http://localhost:8082/websocket/echo
+Connect URL: http://localhost:8082/websocket/echo [TODO]
