@@ -12,12 +12,15 @@ import org.springframework.web.reactive.function.server.ServerResponse.ok
 import org.springframework.web.reactive.function.server.router
 import reactor.core.publisher.Flux
 import reactor.core.publisher.SynchronousSink
+import reactor.core.publisher.toFlux
 import java.math.BigDecimal
 import java.math.MathContext
 import java.time.Duration
 import java.time.Duration.ofMillis
 import java.time.Instant
 import java.util.*
+import kotlin.coroutines.experimental.buildIterator
+import kotlin.coroutines.experimental.buildSequence
 
 @SpringBootApplication
 class StreamApplication
@@ -30,6 +33,10 @@ class QuoteRoutes(val quoteHandler: QuoteHandler) {
         GET("/sse/quotes").nest {
             accept(TEXT_EVENT_STREAM, quoteHandler::fetchQuotesSSE)
             accept(APPLICATION_STREAM_JSON, quoteHandler::fetchQuotes)
+        }
+        GET("/sse/fibonacci").nest {
+            accept(TEXT_EVENT_STREAM, quoteHandler::fetchFibonacciSSE)
+            accept(APPLICATION_STREAM_JSON, quoteHandler::fetchFibonacci)
         }
     }
 
@@ -46,6 +53,13 @@ class QuoteHandler(val quoteGenerator: QuoteGenerator) {
             .contentType(APPLICATION_STREAM_JSON)
             .body(quoteGenerator.fetchQuoteStream(ofMillis(200)), Quote::class.java)
 
+    fun fetchFibonacciSSE(req: ServerRequest) = ok()
+            .contentType(TEXT_EVENT_STREAM)
+            .body(quoteGenerator.fibonacci.toFlux().take(10)  , String::class.java)
+
+    fun fetchFibonacci(req: ServerRequest) = ok()
+            .contentType(APPLICATION_STREAM_JSON)
+            .body(quoteGenerator.fibonacci.toFlux()  , String::class.java)
 }
 
 @Component
@@ -80,6 +94,20 @@ class QuoteGenerator {
             price = quote.price.add(quote.price.multiply(
                     BigDecimal(0.05 * random.nextDouble()), mathContext))
     )
+
+    //    val fibonacci =  buildSequence {
+    val fibonacci =  buildIterator {
+
+        var a = 0
+        var b = 1
+
+        while (true) {
+            yield(b.toString())
+
+            val next = a + b
+            a = b; b = next
+        }
+    }
 
 }
 
