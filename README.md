@@ -85,4 +85,5 @@ gradle --stop
 ### Credits
 * [MiXiT](https://github.com/mixitconf/mixit)
 * [Stéphane Nicoll](https://github.com/snicoll-demos/demo-webflux-streaming)
+* [Daniel Fernández](https://github.com/danielfernandez/reactive-matchday)
 
