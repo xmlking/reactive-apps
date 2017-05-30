@@ -25,52 +25,137 @@
         </div>
     </div>
 </nav>
-<div class="container wrapper">
-    <h2>GuestBook</h2>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Comment</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="entry: ${entries}">
-            <td th:text="${entry.id}">Id</td>
-            <th th:text="${entry.date}">Some Date</th>
-            <th th:text="${entry.name}">Sumo</th>
-            <td th:text="${entry.text}">my comment</td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <h2>Comment</h2>
+            <form id="comment-form" method="POST" action="/guestbook">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <textarea class="form-control" id="comment" name="comment" placeholder="Comment" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-10">
+            <h2>GuestBook</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Comment</th>
+                </tr>
+                </thead>
+                <tbody id="entries">
+                <tr th:each="entry: ${entries}">
+                    <td th:text="${entry.id}">Id</td>
+                    <td th:text="${entry.date}">Some Date</td>
+                    <td th:text="${entry.name}">Sumo</td>
+                    <td th:text="${entry.comment}">my comment</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--<script>-->
-    <!--fetch('http://localhost:8081/api/staff').then(function(response) {-->
-        <!--return response.json();-->
-    <!--}).then(function(data) {-->
-       <!--console.log('data',data)-->
-    <!--});-->
-<!--</script>-->
 <script>
-    var source = new EventSource("/guestbook/feed");
-    source.addEventListener('message', function(e) {
-        console.log('data', JSON.parse(e.data))
-    }, false);
-
-    source.addEventListener('open', function(e) {
-        console.log('Connection was opened.', e)
-    }, false);
-
-    source.addEventListener('error', function(e) {
-        if (e.readyState === EventSource.CLOSED) {
-            console.log('Connection was closed.');
+    const commentForm = document.getElementById('comment-form');
+    commentForm.onsubmit = async function (event) {
+        event.preventDefault();
+        try {
+            const response = await fetch(commentForm.action, {
+                method: commentForm.method,
+                body: formDataToURLSearchParams(new FormData(commentForm))
+            });
+            const responseJson = await response.json();
+            console.log('responseJson', responseJson)
+        } catch (error) {
+            console.error('error', error)
         }
-        console.log('error:::', e);
-    }, false);
+    };
+
+    function formDataToURLSearchParams(fd) {
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        const params = new URLSearchParams();
+        if(isSafari) {
+            params.append('name',document.getElementById('name').value);
+            params.append('comment',document.getElementById('comment').value);
+        } else {
+            for (const pair of fd.entries()) {
+                if(pair[1]) {
+                    params.append(pair[0], pair[1]);
+                }
+            }
+        }
+        return params;
+    }
+</script>
+<script>
+    class GuestBook {
+        constructor() {
+            this.sourceUrl = "/guestbook/feed";
+            this.entriesTable = document.getElementById("entries");
+        }
+
+        start() {
+
+            this.source = new EventSource(this.sourceUrl);
+
+            this.source.addEventListener("message", (event) => {
+                console.log('data', event.data);
+                this.addRow(event.data);
+
+            });
+            this.source.addEventListener('open', function (event) {
+                console.log('Connection was opened.', event)
+            });
+
+            this.source.addEventListener('error', function (event) {
+                if (event.readyState === EventSource.CLOSED) {
+                    console.log('Connection was closed.');
+                }
+                console.log('error:::', event);
+            });
+        }
+
+        addRow(entryRaw) {
+            let entry = JSON.parse(entryRaw);
+            let row = this.entriesTable.insertRow(0);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            let cell3 = row.insertCell(2);
+            let cell4 = row.insertCell(3);
+
+            cell1.innerHTML = entry.id;
+            cell2.innerHTML = entry.stringDate;
+            cell3.innerHTML = entry.name;
+            cell4.innerHTML = entry.comment;
+        }
+
+        addHtmlRow(entryHtml) {
+            this.entriesTable.insertAdjacentHTML( 'beforeend', entryHtml );
+        }
+
+        stop() {
+            this.source.close();
+        }
+    }
+
+    guestBook = new GuestBook();
+    window.onload = function () {
+        guestBook.start();
+    };
+    window.onbeforeunload = function () {
+        guestBook.stop();
+    };
 
 </script>
 </body>

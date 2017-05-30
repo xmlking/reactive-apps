@@ -15,17 +15,17 @@ UI Client App
 ### Running
 > use `./gradlew` instead of `gradle` if you didn't installed `gradle`
 ```bash
-gradle :ui-app:bootRun
+gradle ui-app:bootRun
 ```
 ### Testing
 ```bash
-gradle :ui-app:test
+gradle ui-app:test
 ```
 ### Building 
 ```bash
-gradle :ui-app:build
+gradle ui-app:build
 # build docker image
-gradle :ui-app:docker
+gradle ui-app:docker
 ```
 
 ### App

@@ -36,6 +36,9 @@ A simple demo application showcases end-to-end `Functional Reactive Programming 
 ```bash
 # build all 3 executable jars
 gradle build
+# continuous build with `-t`. 
+# this shoud be started before any run tasks i.e., `gradle ui-app:bootRun`, for spring's devtools to work.
+gradle -t build
 # build all 3 docker images
 gradle docker
 ```
@@ -71,6 +74,8 @@ docker-compose rm -f
 ```bash
 # upgrade project gradle version
 gradle wrapper --gradle-version 3.5
+gradle wrapper --gradle-distribution-url https://repo.gradle.org/gradle/dist-snapshots/gradle-script-kotlin-4.0-20170518042627+0000-all.zip
+# latest version may has bug: https://github.com/gradle/gradle-script-kotlin/issues/376
 gradle wrapper --gradle-distribution-url https://repo.gradle.org/gradle/dist-snapshots/gradle-script-kotlin-4.0-20170523130707+0000-all.zip
 # gradle daemon status 
 gradle --status

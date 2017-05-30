@@ -24,9 +24,7 @@ dependencies {
 
     compile(project(":commons"))
 
-    compile("org.springframework.boot:spring-boot-starter-webflux") {
-        exclude(module = "hibernate-validator")
-    }
+    compile("org.springframework.boot:spring-boot-starter-webflux")
     compileOnly("org.springframework:spring-context-indexer")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     runtime("org.webjars:bootstrap:3.3.7")
@@ -38,4 +36,6 @@ dependencies {
 
     compile("com.fasterxml.jackson.module:jackson-module-kotlin")
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+
+    compile("org.springframework.boot:spring-boot-devtools")
 }

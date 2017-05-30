@@ -9,6 +9,6 @@ import java.time.LocalDateTime;
 data class GuestBookEntry(
         @Id val id: String?,
         val name: String,
-        val text: String,
+        val comment: String,
         val date: LocalDateTime = LocalDateTime.now()
 )

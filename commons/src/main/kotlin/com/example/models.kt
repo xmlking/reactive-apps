@@ -6,9 +6,12 @@ import java.time.LocalDateTime
 
 data class Quote(val ticker: String, val price: BigDecimal, val instant: Instant = Instant.now())
 
-data class GuestBookEntryDto(
+data class GuestBookEntryDTO(
         val id: String?,
         val name: String,
-        val text: String,
+        val comment: String,
         val date: LocalDateTime = LocalDateTime.now()
-)
+) {
+    val stringDate: String
+        get() = "$date"
+}

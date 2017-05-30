@@ -26,12 +26,10 @@ class UserHandler(val repository: UserRepository) {
                 }
             }
 
+    fun findAll(req: ServerRequest) = ok().json().body(repository.findAll())
     fun findOne(req: ServerRequest) = ok().json().body(repository.findOne(req.pathVariable("login")))
 
-    fun findAll(req: ServerRequest) = ok().json().body(repository.findAll())
-
-    fun findStaff(req: ServerRequest) = ok().json().body(repository.findByRole(Role.STAFF))
-
+    fun findAllStaff(req: ServerRequest) = ok().json().body(repository.findByRole(Role.STAFF))
     fun findOneStaff(req: ServerRequest) = ok().json().body(repository.findOneByRole(req.pathVariable("login"), Role.STAFF))
 
     fun create(req: ServerRequest) = repository.save(req.bodyToMono<User>()).flatMap {

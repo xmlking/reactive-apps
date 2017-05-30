@@ -14,17 +14,19 @@ MongoDB Data API
 ### Running
 > use `./gradlew` instead of `gradle` if you didn't installed `gradle`
 ```bash
-gradle :mongo-data-service:bootRun
+gradle mongo-data-service:bootRun
+# run with `dev` profile. loads application-dev.properties
+SPRING_PROFILES_ACTIVE=dev gradle mongo-data-service:bootRun
 ```
 ### Testing
 ```bash
-gradle :mongo-data-service:test
+gradle mongo-data-service:test
 ```
 ### Building 
 ```bash
-gradle :mongo-data-service:build
+gradle mongo-data-service:build
 # build docker image
-gradle :mongo-data-service:docker
+gradle mongo-data-service:docker
 ```
 
 ### API
@@ -41,3 +43,6 @@ http://localhost:8081/api/staff
 http://localhost:8081/api/staff/sdeleuze
 
 http://localhost:8081/api/guestbook
+
+### EventSource API
+http://localhost:8081/sse/guestbook

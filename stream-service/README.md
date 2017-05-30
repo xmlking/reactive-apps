@@ -14,17 +14,17 @@ Stream API
 ### Running
 > use `./gradlew` instead of `gradle` if you didn't installed `gradle`
 ```bash
-gradle :stream-service:bootRun
+gradle stream-service:bootRun
 ```
 ### Testing
 ```bash
-gradle :stream-service:test
+gradle stream-service:test
 ```
 ### Building 
 ```bash
-gradle :stream-service:build
+gradle stream-service:build
 # build docker image
-gradle :stream-service:docker
+gradle stream-service:docker
 ```
 
 ### API

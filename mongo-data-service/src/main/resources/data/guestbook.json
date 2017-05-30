@@ -2,7 +2,7 @@
   {
     "id": "5924f47c6200de5220d870cc",
     "name": "sumo",
-    "text": "hellp world",
+    "comment": "hellp world",
     "date": [
       2017,
       5,
@@ -16,7 +16,7 @@
   {
     "id": "5924f4d06200de5220d870cd",
     "name": "demo",
-    "text": "test 123",
+    "comment": "test 123",
     "date": [
       2017,
       5,
@@ -30,7 +30,7 @@
   {
     "id": "5924f4e36200de5220d870ce",
     "name": "demo1",
-    "text": "test 345",
+    "comment": "test 345",
     "date": [
       2017,
       5,
@@ -44,7 +44,7 @@
   {
     "id": "5924f4f16200de5220d870cf",
     "name": "sumo1",
-    "text": "sumo 345",
+    "comment": "sumo 345",
     "date": [
       2017,
       5,

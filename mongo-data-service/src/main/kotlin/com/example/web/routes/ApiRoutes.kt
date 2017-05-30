@@ -30,7 +30,7 @@ class ApiRoutes(val eventHandler: EventHandler,
                 GET("/{login}", userHandler::findOne)
             }
             "/staff".nest {
-                GET("/", userHandler::findStaff)
+                GET("/", userHandler::findAllStaff)
                 GET("/{login}", userHandler::findOneStaff)
             }
 

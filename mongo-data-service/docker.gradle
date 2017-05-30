@@ -6,7 +6,7 @@ docker {
     dockerfile file('src/main/docker/Dockerfile')
     buildArgs([
             JAR_NAME : jar.archiveName,
-            PORT     : '8081',
+            PORT     : '8080',
             JAVA_OPTS: '-Xms512m -Xmx1024m'
     ])
     pull true

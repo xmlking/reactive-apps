@@ -55,11 +55,11 @@ class QuoteHandler(val quoteGenerator: QuoteGenerator) {
 
     fun fetchFibonacciSSE(req: ServerRequest) = ok()
             .contentType(TEXT_EVENT_STREAM)
-            .body(quoteGenerator.fibonacci.toFlux().take(10), String::class.java)
+            .body(quoteGenerator.fetchFibonacciStream(ofMillis(1000)), String::class.java)
 
     fun fetchFibonacci(req: ServerRequest) = ok()
             .contentType(APPLICATION_STREAM_JSON)
-            .body(quoteGenerator.fibonacci.toFlux(), String::class.java)
+            .body(quoteGenerator.fetchFibonacciStream(ofMillis(1000)), String::class.java)
 }
 
 @Component
@@ -95,23 +95,29 @@ class QuoteGenerator {
                     BigDecimal(0.05 * random.nextDouble()), mathContext))
     )
 
-    //    val fibonacci =  buildSequence {
+
     val fibonacci =  buildIterator {
 
-        var a = 0
-        var b = 1
+        var a = 0L
+        var b = 1L
 
         while (true) {
-            yield(b.toString())
+            yield(b)
 
             val next = a + b
             a = b; b = next
         }
     }
 
+    fun fetchFibonacciStream(interval: Duration) = fibonacci.toFlux()
+            .delayElements(interval)
+            .map{it.toString()}
+            .share()
+            .log()
+
 }
 
-// NOTE: declared it in shared module :commons
+// NOTE: declared it in shared module `commons`
 //data class Quote(val ticker: String, val price: BigDecimal, val instant: Instant = Instant.now())
 
 fun main(args: Array<String>) {

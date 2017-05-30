@@ -4,7 +4,7 @@ MAINTAINER "Sumanth Chinthagunta"
 ARG JAR_NAME
 ARG JAVA_OPTS
 ARG PORT
-#VOLUME /tmp
+VOLUME /tmp
 WORKDIR /app
 ADD $JAR_NAME app.jar
 RUN touch app.jar

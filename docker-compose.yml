@@ -13,8 +13,8 @@ services:
     ports:
       - 8080:8080
     environment:
-      - app.mongoApiUrl=http://mongo:8081
-      - app.streamApiUrl=http://stream:8082
+      - app.mongoApiUrl=http://mongo:8080
+      - app.streamApiUrl=http://stream:8080
     links:
       - mongo
       - stream
