@@ -4,7 +4,7 @@ import org.hibernate.validator.constraints.NotBlank
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.http.MediaType
+import org.springframework.http.MediaType.*
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
@@ -30,7 +30,7 @@ class MainController(@Value("\${app.mongoApiUrl}") val mongoApiUrl: String,
 		val userList = WebClient.create(mongoApiUrl)
 				.get()
 				.uri("api/staff")
-				.accept(MediaType.APPLICATION_JSON)
+				.accept(APPLICATION_JSON)
 				.retrieve()
 				.bodyToFlux(User::class.java)
 				.log()
@@ -45,13 +45,13 @@ class MainController(@Value("\${app.mongoApiUrl}") val mongoApiUrl: String,
 		return "quotes"
 	}
 
-	@GetMapping(path = arrayOf("/quotes/feed"), produces = arrayOf(MediaType.TEXT_EVENT_STREAM_VALUE))
+	@GetMapping(path = arrayOf("/quotes/feed"), produces = arrayOf(TEXT_EVENT_STREAM_VALUE))
 	@ResponseBody
 	fun fetchQuotesStream(): Flux<Quote> {
 		return WebClient.create(streamApiUrl)
 				.get()
 				.uri("/sse/quotes")
-				.accept(MediaType.APPLICATION_STREAM_JSON)
+				.accept(APPLICATION_STREAM_JSON)
 				.retrieve()
 				.bodyToFlux(Quote::class.java)
 				.share()
@@ -63,7 +63,7 @@ class MainController(@Value("\${app.mongoApiUrl}") val mongoApiUrl: String,
 		val entryList = WebClient.create(mongoApiUrl)
 				.get()
 				.uri("api/guestbook")
-				.accept(MediaType.APPLICATION_JSON)
+				.accept(APPLICATION_JSON)
 				.retrieve()
 				.bodyToFlux(GuestBookEntryDTO::class.java)
 				.log()
@@ -82,32 +82,32 @@ class MainController(@Value("\${app.mongoApiUrl}") val mongoApiUrl: String,
 		return WebClient.create(mongoApiUrl)
                 .post()
                 .uri("api/guestbook")
-                .accept(MediaType.APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
 				.syncBody(guestBookEntryVO)
                 .exchange()
                 .flatMap{response -> response.bodyToMono(GuestBookEntryDTO::class.java)}
                 .log()
     }
 
-    @GetMapping(path = arrayOf("/guestbook/feed"), produces = arrayOf(MediaType.TEXT_EVENT_STREAM_VALUE))
+    @GetMapping(path = arrayOf("/guestbook/feed"), produces = arrayOf(TEXT_EVENT_STREAM_VALUE))
     @ResponseBody
     fun guestBookStream(): Flux<GuestBookEntryDTO> {
         return WebClient.create(mongoApiUrl)
                 .get()
                 .uri("/sse/guestbook")
-                .accept(MediaType.APPLICATION_STREAM_JSON)
+                .accept(APPLICATION_STREAM_JSON)
                 .retrieve()
                 .bodyToFlux(GuestBookEntryDTO::class.java)
                 .share()
                 .log()
     }
 
-    @GetMapping(path = arrayOf("/guestbook/feed_html"), produces = arrayOf(MediaType.TEXT_EVENT_STREAM_VALUE))
+    @GetMapping(path = arrayOf("/guestbook/feed_html"), produces = arrayOf(TEXT_EVENT_STREAM_VALUE))
     fun guestBookHtmlStream(model: Model): String {
 		val guestBookStream = WebClient.create(mongoApiUrl)
                 .get()
                 .uri("/sse/guestbook")
-                .accept(MediaType.APPLICATION_STREAM_JSON)
+                .accept(APPLICATION_STREAM_JSON)
                 .retrieve()
                 .bodyToFlux(GuestBookEntryDTO::class.java)
 				.share()
