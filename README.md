@@ -50,7 +50,7 @@ gradle test
 
 ### Running
 ##### Manual 
-Start all 3 apps: [mongo-data-service](./mongo-data-service/README.md), [stream-service](./stream-service/README.md), [ui-app](./ui-app/README.md)
+Start all 3 apps: [mongo-data-service](./mongo-data-service/), [stream-service](./stream-service/README.md), [ui-app](./ui-app/README.md)
 ##### Docker
 You can also build Docker images and run all via `Docker Compose`
 ```bash
