@@ -29,6 +29,7 @@ gradle stream-service:docker
 
 ### API
 http://localhost:8082/sse/quotes
+
 http://localhost:8082/sse/fibonacci
 
 ### Test testing tool for socket.io
