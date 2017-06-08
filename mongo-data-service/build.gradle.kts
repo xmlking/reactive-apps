@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.run.BootRun
+
 val reactorKotlinExtensions by project
 
 apply {
@@ -18,6 +20,13 @@ plugins {
 noArg {
     annotation("org.springframework.data.mongodb.core.mapping.Document")
 }
+// Ensures IntelliJ can load resource files
+val bootRun: BootRun by tasks
+bootRun.apply {
+    val sourceSets = the<JavaPluginConvention>().sourceSets
+    sourceResources(sourceSets["main"])
+}
+
 
 dependencies {
     compile(kotlinModule("stdlib-jre8"))
