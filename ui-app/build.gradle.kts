@@ -1,49 +1,43 @@
-import org.springframework.boot.gradle.tasks.run.BootRun
+import com.palantir.gradle.docker.DockerExtension
+import org.gradle.jvm.tasks.Jar
 
 val reactorKotlinExtensions by project
 
 apply {
-    plugin("org.springframework.boot")
-    plugin("org.jetbrains.kotlin.jvm")
-    plugin("org.jetbrains.kotlin.plugin.spring")
-//    plugin("org.jetbrains.kotlin.plugin.noarg")
-//    plugin("org.jetbrains.kotlin.plugin.jpa")
-    plugin("io.spring.dependency-management")
     plugin("com.palantir.docker")
-    from("docker.gradle")
 }
 
-plugins {
-    id("org.jetbrains.kotlin.plugin.noarg") version "1.1.2-2"
-}
-noArg {
-    annotation("org.springframework.data.mongodb.core.mapping.Document")
-}
-// Ensures IntelliJ can load resource files
-val bootRun: BootRun by tasks
-bootRun.apply {
-    val sourceSets = the<JavaPluginConvention>().sourceSets
-    sourceResources(sourceSets["main"])
+val jar: Jar by tasks
+docker {
+    name = "${group}/${jar.baseName}:${jar.version}"
+    files(jar.outputs) //  jar.outputs , file("src/main/docker/.ssl/truststore.jks")
+    setDockerfile(file("src/main/docker/Dockerfile"))
+    buildArgs(mapOf(
+            "JAR_NAME" to jar.archiveName,
+            "PORT"   to  "8080",
+            "JAVA_OPTS" to "-Xms64m -Xmx128m"
+    ))
+    pull(true)
+    dependsOn(tasks.findByName("build"))
 }
 
 dependencies {
-    compile(kotlinModule("stdlib-jre8"))
-    compile(kotlinModule("reflect"))
-
     compile(project(":commons"))
 
-    compile("org.springframework.boot:spring-boot-starter-webflux")
-    compileOnly("org.springframework:spring-context-indexer")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     runtime("org.webjars:bootstrap:3.3.7")
     runtime("org.webjars:highcharts:5.0.8")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
 
     compile("io.projectreactor:reactor-kotlin-extensions:$reactorKotlinExtensions")
     testCompile("io.projectreactor.addons:reactor-test")
 
     compile("com.fasterxml.jackson.module:jackson-module-kotlin")
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-
-    compile("org.springframework.boot:spring-boot-devtools")
 }
+
+/**
+ * Configures the [docker][DockerExtension] project extension.
+ */
+val Project.docker get() = extensions.getByName("docker") as DockerExtension
+
+fun Project.docker(configure: DockerExtension.() -> Unit): Unit = extensions.configure("docker", configure)

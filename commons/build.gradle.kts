@@ -1,28 +1,7 @@
-import org.springframework.boot.gradle.tasks.run.BootRun
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
-val reactorKotlinExtensions by project
-
-apply {
-//    plugin("org.springframework.boot")
-    plugin("org.jetbrains.kotlin.jvm")
-    plugin("org.jetbrains.kotlin.plugin.spring")
-//    plugin("org.jetbrains.kotlin.plugin.noarg")
-//    plugin("org.jetbrains.kotlin.plugin.jpa")
-    plugin("io.spring.dependency-management")
+// Prevents common subproject dependencies from being included in the common jar itself.
+// Without this, each subproject that included common would include each shared dependency twice.
+tasks.withType<BootJar> {
+    enabled = false
 }
-
-plugins {
-    id("org.jetbrains.kotlin.plugin.noarg") version "1.1.2-2"
-}
-noArg {
-    annotation("org.springframework.data.mongodb.core.mapping.Document")
-}
-
-dependencies {
-    compile(kotlinModule("stdlib-jre8"))
-    compile(kotlinModule("reflect"))
-}
-
-//bootJar {
-//    enabled = false
-//}

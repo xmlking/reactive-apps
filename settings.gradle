@@ -1,1 +1,1 @@
-include 'mongo-data-service', 'stream-service', 'ui-app', 'commons'
+include 'commons', 'mongo-data-service', 'stream-service', 'ui-app'

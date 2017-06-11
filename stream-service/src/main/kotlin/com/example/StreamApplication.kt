@@ -118,7 +118,7 @@ class QuoteGenerator {
 }
 
 // NOTE: declared it in shared module `commons`
-//data class Quote(val ticker: String, val price: BigDecimal, val instant: Instant = Instant.now())
+data class Quote(val ticker: String, val price: BigDecimal, val instant: Instant = Instant.now())
 
 fun main(args: Array<String>) {
     SpringApplication.run(StreamApplication::class.java, *args)
