@@ -22,7 +22,7 @@ docker {
 }
 
 dependencies {
-    compile(project(":commons"))
+    compile(project(":shared"))
 
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     runtime("org.webjars:bootstrap:3.3.7")

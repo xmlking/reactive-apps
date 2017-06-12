@@ -22,7 +22,7 @@ docker {
 }
 
 dependencies {
-    compile(project(":commons"))
+    compile(project(":shared"))
 
     compile("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
     runtime("de.flapdoodle.embed:de.flapdoodle.embed.mongo")

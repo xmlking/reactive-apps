@@ -22,7 +22,7 @@ docker {
 }
 
 dependencies {
-    compile(project(":commons"))
+    compile(project(":shared"))
 
     compile("io.projectreactor:reactor-kotlin-extensions:$reactorKotlinExtensions")
     testCompile("io.projectreactor.addons:reactor-test")
