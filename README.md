@@ -76,7 +76,7 @@ docker-compose rm -f
 ### Gradle Commands
 ```bash
 # upgrade project gradle version
-./gradlew wrapper --gradle-version=4.0-rc-2
+gradle wrapper --gradle-version=4.0-rc-2
 # gradle daemon status 
 gradle --status
 gradle --stop
