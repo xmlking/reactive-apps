@@ -2,15 +2,15 @@ Commons
 =======
 common components, utils etc.
 
-### Running
+### Run
 ```bash
 gradle :commons:clean
 ```
-### Testing
+### Test
 ```bash
 gradle :commons:test
 ```
-### Building 
+### Build
 ```bash
 gradle :commons:build
 ```
