@@ -19,7 +19,6 @@ plugins {
     val springBootVersion = "2.0.0.RELEASE"
     val dockerPluginVersion = "0.13.0"
 
-    base
     id("org.jetbrains.kotlin.jvm") version kotlinVersion apply false
     id("org.jetbrains.kotlin.plugin.spring") version kotlinVersion apply false
     id("io.spring.dependency-management") version springDependencyManagement apply false
