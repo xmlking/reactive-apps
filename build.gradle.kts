@@ -1,7 +1,5 @@
-import com.palantir.gradle.docker.DockerExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.run.BootRun
-import org.jetbrains.kotlin.noarg.gradle.NoArgExtension
 
 buildscript {
     val springBootVersion = "2.0.0.M1"
@@ -31,8 +29,6 @@ plugins {
     id("com.palantir.docker") version dockerPluginVersion apply false
 }
 
-description = "Reactive Apps Showcase"
-
 subprojects {
 
     apply {
@@ -43,8 +39,6 @@ subprojects {
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
     }
-
-    group = "reactive"
 
     repositories {
         mavenCentral()

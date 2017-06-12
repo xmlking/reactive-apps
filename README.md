@@ -77,8 +77,6 @@ docker-compose rm -f
 ```bash
 # upgrade project gradle version
 ./gradlew wrapper --gradle-version=4.0-rc-2
-# latest version may has bug: https://github.com/gradle/gradle-script-kotlin/issues/376
-gradle wrapper --gradle-distribution-url https://repo.gradle.org/gradle/dist-snapshots/gradle-script-kotlin-4.0-20170523130707+0000-all.zip
 # gradle daemon status 
 gradle --status
 gradle --stop
