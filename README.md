@@ -2,7 +2,7 @@ Reactive Apps
 =============
 A simple demo application showcases end-to-end `Functional Reactive Programming (FRP)` with Spring 5.
 
-![Reactive](./reactive-apps.png "Reactive App")
+![Reactive](./docs/reactive-apps.png "Reactive App")
 
 ##### Technology stack
 * Spring Framework 5
