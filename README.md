@@ -35,7 +35,7 @@ sdk install gradle 4.0
 
 > use `./gradlew` instead of `gradle` until 4.0 is released.
 
-### Building
+### Build
 ```bash
 # build all 3 executable jars
 gradle build
@@ -46,12 +46,12 @@ gradle -t build
 gradle docker
 ```
 
-### Testing
+### Test
 ```bash
 gradle test
 ```
 
-### Running
+### Run
 ##### Manual 
 Start all 3 apps: [mongo-data-service](./mongo-data-service/), [stream-service](./stream-service/), [ui-app](./ui-app/)
 ##### Docker

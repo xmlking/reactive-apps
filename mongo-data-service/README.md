@@ -11,18 +11,18 @@ MongoDB Data API
 ##### Features
 * Functional Style Routes
 
-### Running
+### Run
 > use `./gradlew` instead of `gradle` if you didn't installed `gradle`
 ```bash
 gradle mongo-data-service:bootRun
 # run with `dev` profile. loads application-dev.properties
 SPRING_PROFILES_ACTIVE=dev gradle mongo-data-service:bootRun
 ```
-### Testing
+### Test
 ```bash
 gradle mongo-data-service:test
 ```
-### Building 
+### Build
 ```bash
 gradle mongo-data-service:build
 # build docker image

@@ -11,16 +11,16 @@ Stream API
 * Server-Sent Events (SSE)
 * Functional Style Routes
 
-### Running
+### Run
 > use `./gradlew` instead of `gradle` if you didn't installed `gradle`
 ```bash
 gradle stream-service:bootRun
 ```
-### Testing
+### Test
 ```bash
 gradle stream-service:test
 ```
-### Building 
+### Build
 ```bash
 gradle stream-service:build
 # build docker image
