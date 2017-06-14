@@ -27,11 +27,8 @@ A simple demo application showcases end-to-end `Functional Reactive Programming 
 
 
 ### Prerequisites
-* Gradle 4 or later.
-> Recommended to install Gradle with [sdkman](http://sdkman.io)
-```bash
-sdk install gradle 4.0
-```
+1. Gradle 4 (Install via [sdkman](http://sdkman.io/))
+2. Docker for Mac [Setup Instructions](./docs/Docker.md)
 
 > use `./gradlew` instead of `gradle` until 4.0 is released.
 
@@ -76,7 +73,7 @@ docker-compose rm -f
 ### Gradle Commands
 ```bash
 # upgrade project gradle version
-gradle wrapper --gradle-version=4.0-rc-2
+gradle wrapper --gradle-version=4.0
 # gradle daemon status 
 gradle --status
 gradle --stop

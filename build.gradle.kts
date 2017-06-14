@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.dsl.SpringBootExtension
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 buildscript {
@@ -52,6 +53,7 @@ subprojects {
         compileOnly("org.springframework:spring-context-indexer")
         compile("org.springframework.boot:spring-boot-devtools")
         testCompile("org.springframework.boot:spring-boot-starter-test")
+        compile("org.springframework.boot:spring-boot-starter-actuator")
     }
 
     tasks.withType<KotlinCompile>().all {
@@ -68,6 +70,10 @@ subprojects {
         // Ensures IntelliJ can live reload resource files
         val sourceSets = the<JavaPluginConvention>().sourceSets
         sourceResources(sourceSets["main"])
+    }
+
+    configure<SpringBootExtension> {
+        buildInfo()
     }
 
 }
