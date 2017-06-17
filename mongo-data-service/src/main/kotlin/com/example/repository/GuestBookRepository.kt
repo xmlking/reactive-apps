@@ -1,15 +1,14 @@
 package com.example.repository
 
 import com.example.domain.GuestBookEntry
-import com.example.util.*
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.slf4j.LoggerFactory
 import org.springframework.core.io.ClassPathResource
 import org.springframework.data.domain.Sort
+import org.springframework.data.mongodb.core.*
 import org.springframework.data.mongodb.core.CollectionOptions
-import org.springframework.data.mongodb.core.ReactiveMongoTemplate
-import org.springframework.data.mongodb.core.query.Criteria
+import org.springframework.data.mongodb.core.query.Criteria.*
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.data.mongodb.repository.Tailable
@@ -40,12 +39,12 @@ class  GuestBookRepository(val template: ReactiveMongoTemplate,
     fun count() = template.count<GuestBookEntry>()
 
     fun findAll() = template.find<GuestBookEntry>(Query().with(Sort.by("year")))
-    fun tailByTimestampGreaterThan(timestamp: Date) = template.tail<GuestBookEntry>(Query(Criteria.where("date").gte(timestamp)))
+    fun tailByTimestampGreaterThan(timestamp: Date) = template.tail<GuestBookEntry>(Query(where("date").gte(timestamp)))
 
     fun findOne(id: String) = template.findById<GuestBookEntry>(id)
 
     fun deleteAll() = template.remove<GuestBookEntry>(Query())
-    fun deleteOne(id: String) = template.remove<GuestBookEntry>(Query(Criteria.where("_id").`is`(id)))
+    fun deleteOne(id: String) = template.remove<GuestBookEntry>(Query(where("_id").`is`(id)))
 
     fun save(entry: GuestBookEntry) = template.save(entry)
     fun save(entry: Mono<GuestBookEntry>) = template.save(entry)

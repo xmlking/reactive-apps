@@ -3,7 +3,7 @@ import org.springframework.boot.gradle.dsl.SpringBootExtension
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 buildscript {
-    val springBootVersion = "2.0.0.M1"
+    val springBootVersion = "2.0.0.M2"
 
     repositories {
         mavenCentral()
@@ -15,7 +15,7 @@ buildscript {
 }
 
 plugins {
-    val kotlinVersion = "1.1.2-2"
+    val kotlinVersion = "1.1.2-5"
     val springDependencyManagement = "1.0.3.RELEASE"
     val springBootVersion = "2.0.0.RELEASE"
     val dockerPluginVersion = "0.13.0"

@@ -28,7 +28,7 @@ dependencies {
     runtime("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
 
     compile("io.projectreactor:reactor-kotlin-extensions:$reactorKotlinExtensions")
-    testCompile("io.projectreactor.addons:reactor-test")
+    testCompile("io.projectreactor:reactor-test")
 
     compile("com.fasterxml.jackson.module:jackson-module-kotlin")
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")

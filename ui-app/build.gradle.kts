@@ -29,7 +29,7 @@ dependencies {
     runtime("org.webjars:highcharts:5.0.8")
 
     compile("io.projectreactor:reactor-kotlin-extensions:$reactorKotlinExtensions")
-    testCompile("io.projectreactor.addons:reactor-test")
+    testCompile("io.projectreactor:reactor-test")
 
     compile("com.fasterxml.jackson.module:jackson-module-kotlin")
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
