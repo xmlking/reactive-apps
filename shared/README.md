@@ -1,16 +1,16 @@
-Commons
-=======
-common components, utils etc.
+Shared Lib
+==========
+common shared components, utils etc.
 
 ### Run
 ```bash
-gradle :commons:clean
+gradle :shared:clean
 ```
 ### Test
 ```bash
-gradle :commons:test
+gradle :shared:test
 ```
 ### Build
 ```bash
-gradle :commons:build
+gradle :shared:build
 ```
