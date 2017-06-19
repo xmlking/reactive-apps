@@ -49,8 +49,3 @@ class  GuestBookRepository(val template: ReactiveMongoTemplate,
     fun save(entry: GuestBookEntry) = template.save(entry)
     fun save(entry: Mono<GuestBookEntry>) = template.save(entry)
 }
-
-//@Repository
-//interface  GuestBookRepository1 : ReactiveMongoRepository<GuestBookEntry, String> {
-//    @Tailable fun findBy(): Flux<GuestBookEntry>
-//}

@@ -13,6 +13,7 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.net.URI
 import java.text.Normalizer
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
@@ -45,6 +46,9 @@ fun ServerResponse.BodyBuilder.json() = contentType(APPLICATION_JSON_UTF8)
 fun ServerResponse.BodyBuilder.xml() = contentType(APPLICATION_XML)
 
 fun ServerResponse.BodyBuilder.html() = contentType(TEXT_HTML)
+
+fun ServerResponse.BodyBuilder.textStream() = contentType(TEXT_EVENT_STREAM)
+fun ServerResponse.BodyBuilder.jsonStream() = contentType(APPLICATION_STREAM_JSON)
 
 fun permanentRedirect(uri: String) = permanentRedirect(URI(uri)).build()
 
@@ -126,3 +130,12 @@ fun <T> Iterable<T>.shuffle(): Iterable<T> =
         toMutableList().apply { Collections.shuffle(this) }
 
 fun localePrefix(locale: Locale) = if (locale.language == "en") "/en" else ""
+
+
+// ----------------
+//  Date Extension methods
+// ----------------
+
+fun LocalDate.toStr(format:String = "dd/MM/yyyy") = DateTimeFormatter.ofPattern(format).format(this)
+
+fun String.toLocalDate(format:String = "dd/MM/yyyy") = LocalDate.parse(this, DateTimeFormatter.ofPattern(format))

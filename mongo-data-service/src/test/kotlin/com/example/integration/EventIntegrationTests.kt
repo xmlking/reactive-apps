@@ -9,7 +9,6 @@ import org.springframework.web.reactive.function.client.bodyToMono
 import org.springframework.web.reactive.function.client.bodyToFlux
 import reactor.core.publisher.test
 
-
 class EventIntegrationTests : AbstractIntegrationTests() {
 
     @Test
@@ -39,5 +38,5 @@ class EventIntegrationTests : AbstractIntegrationTests() {
                 .consumeNextWith { assertEquals(2017, it.year) }
                 .verifyComplete()
     }
-    
+
 }

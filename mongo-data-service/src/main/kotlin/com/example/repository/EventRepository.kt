@@ -5,14 +5,24 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.example.domain.*
 import org.slf4j.LoggerFactory
 import org.springframework.core.io.ClassPathResource
+import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.*
 import org.springframework.data.mongodb.core.query.Query
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository
+import org.springframework.data.mongodb.repository.Tailable
 import org.springframework.stereotype.Repository
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Repository
-class EventRepository(val template: ReactiveMongoTemplate,
+interface  EventRepository : ReactiveMongoRepository<Event, String> {
+    @Tailable fun findBy(): Flux<Event>
+    fun findByCurrentOrderByStart(current : Boolean, pageable: Pageable) : Flux<Event>
+}
+
+@Repository
+class EventRepository1(val template: ReactiveMongoTemplate,
                       val objectMapper: ObjectMapper) {
 
     private val logger = LoggerFactory.getLogger(this.javaClass)
@@ -27,15 +37,5 @@ class EventRepository(val template: ReactiveMongoTemplate,
     }
 
     fun count() = template.count<Event>()
-
-    fun findAll() = template.find<Event>(Query().with(Sort.by("year")))
-
-    fun findOne(id: String) = template.findById<Event>(id)
-
-    fun deleteAll() = template.remove<Event>(Query())
-
     fun save(event: Event) = template.save(event)
-
-    fun save(user: Mono<User>) = template.save(user)
-
 }

@@ -3,6 +3,8 @@ package com.example.web.handler
 import com.example.domain.GuestBookEntry
 import com.example.repository.GuestBookRepository
 import com.example.util.json
+import com.example.util.jsonStream
+import com.example.util.textStream
 import org.springframework.http.MediaType.*
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
@@ -20,11 +22,9 @@ class GuestBookHandler(val repository: GuestBookRepository) {
 
     fun create(req: ServerRequest) = ok().json().body(repository.save(req.bodyToMono<GuestBookEntry>()))
 
-    fun fetchSSE(req: ServerRequest) = ok()
-            .contentType(TEXT_EVENT_STREAM)
-            .body(repository.tailByTimestampGreaterThan((GregorianCalendar.getInstance().time)), GuestBookEntry::class.java)
+    fun fetchSSE(req: ServerRequest) = ok().textStream()
+            .body(repository.tailByTimestampGreaterThan((GregorianCalendar.getInstance().time)))
 
-    fun fetch(req: ServerRequest) = ok()
-            .contentType(APPLICATION_STREAM_JSON)
-            .body(repository.tailByTimestampGreaterThan((GregorianCalendar.getInstance().time)), GuestBookEntry::class.java)
+    fun fetch(req: ServerRequest) = ok().jsonStream()
+            .body(repository.tailByTimestampGreaterThan((GregorianCalendar.getInstance().time)))
 }

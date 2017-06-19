@@ -10,8 +10,6 @@ import org.springframework.web.reactive.function.client.bodyToFlux
 import org.springframework.web.reactive.function.client.bodyToMono
 import reactor.core.publisher.test
 
-
-
 class UserIntegrationTests : AbstractIntegrationTests() {
 
     @Test
