@@ -51,6 +51,8 @@ gradle test
 ### Run
 ##### Manual 
 Start all 3 apps: [mongo-data-service](./mongo-data-service/), [stream-service](./stream-service/), [ui-app](./ui-app/)
+> If you want to debug the app, add --debug-jvm parameter to Gradle command line
+
 ##### Docker
 You can also build Docker images and run all via `Docker Compose`
 ```bash
@@ -83,4 +85,4 @@ gradle --stop
 * [MiXiT](https://github.com/mixitconf/mixit)
 * [Stéphane Nicoll](https://github.com/snicoll-demos/demo-webflux-streaming)
 * [Daniel Fernández](https://github.com/danielfernandez/reactive-matchday)
-
+* [Stathis Souris](https://ssouris.github.io/2017/06/02/petclinic-spring-5-kotlin-reactive-mongodb.html)

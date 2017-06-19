@@ -25,6 +25,7 @@ dependencies {
     compile(project(":shared"))
 
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+//    compile("org.thymeleaf.extras:thymeleaf-extras-java8time")
     runtime("org.webjars:bootstrap:3.3.7")
     runtime("org.webjars:highcharts:5.0.8")
 

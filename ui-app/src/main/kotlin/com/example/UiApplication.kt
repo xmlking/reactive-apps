@@ -139,3 +139,13 @@ data class GuestBookEntryVO(
 fun main(args: Array<String>) {
     SpringApplication.run(UiApplication::class.java, *args)
 }
+
+
+//@Bean
+//open fun templateEngine(): SpringTemplateEngine {
+//	val templateEngine = SpringTemplateEngine()
+//	templateEngine.setTemplateResolver(templateResolver())
+//	templateEngine.addDialect(SpringSecurityDialect())
+//	templateEngine.addDialect(Java8TimeDialect())
+//	return templateEngine
+//}

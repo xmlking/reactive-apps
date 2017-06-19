@@ -23,6 +23,8 @@ gradle stream-service:test
 ### Build
 ```bash
 gradle stream-service:build
+# continuous build with `-t`. 
+gradle -t stream-service:build
 # build docker image
 gradle stream-service:docker
 ```

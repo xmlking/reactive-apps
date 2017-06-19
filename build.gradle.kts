@@ -19,11 +19,10 @@ plugins {
     val springDependencyManagement = "1.0.3.RELEASE"
     val springBootVersion = "2.0.0.RELEASE"
     val dockerPluginVersion = "0.13.0"
-
+    //    id("org.springframework.boot") version springBootVersion apply false TODO
+    id("io.spring.dependency-management") version springDependencyManagement apply false
     id("org.jetbrains.kotlin.jvm") version kotlinVersion apply false
     id("org.jetbrains.kotlin.plugin.spring") version kotlinVersion apply false
-    id("io.spring.dependency-management") version springDependencyManagement apply false
-//    id("org.springframework.boot") version springBootVersion apply false TODO
     id("org.jetbrains.kotlin.plugin.noarg") version kotlinVersion // apply false TODO
     id("org.jetbrains.kotlin.plugin.jpa") version kotlinVersion apply false
     id("com.palantir.docker") version dockerPluginVersion apply false
@@ -46,8 +45,8 @@ subprojects {
     }
 
     dependencies {
-        compile(kotlinModule("stdlib-jre8"))
-        compile(kotlinModule("reflect"))
+        compile("org.jetbrains.kotlin:kotlin-stdlib-jre8")
+        compile("org.jetbrains.kotlin:kotlin-reflect")
 
         compile("org.springframework.boot:spring-boot-starter-webflux")
         compileOnly("org.springframework:spring-context-indexer")
@@ -59,6 +58,7 @@ subprojects {
     tasks.withType<KotlinCompile>().all {
         kotlinOptions {
             jvmTarget = "1.8"
+            javaParameters = true
         }
     }
 
