@@ -3,7 +3,7 @@ import org.springframework.boot.gradle.dsl.SpringBootExtension
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 buildscript {
-    val springBootVersion = "2.0.0.M2"
+    val springBootVersion = "2.0.0.M3"
 
     repositories {
         mavenCentral()
@@ -15,7 +15,7 @@ buildscript {
 }
 
 plugins {
-    val kotlinVersion = "1.1.2-5"
+    val kotlinVersion = "1.1.3-2"
     val springDependencyManagement = "1.0.3.RELEASE"
     val springBootVersion = "2.0.0.RELEASE"
     val dockerPluginVersion = "0.13.0"
@@ -23,7 +23,6 @@ plugins {
     id("io.spring.dependency-management") version springDependencyManagement apply false
     id("org.jetbrains.kotlin.jvm") version kotlinVersion apply false
     id("org.jetbrains.kotlin.plugin.spring") version kotlinVersion apply false
-    id("org.jetbrains.kotlin.plugin.noarg") version kotlinVersion // apply false TODO
     id("org.jetbrains.kotlin.plugin.jpa") version kotlinVersion apply false
     id("com.palantir.docker") version dockerPluginVersion apply false
 }
@@ -33,7 +32,6 @@ subprojects {
     apply {
         plugin("org.jetbrains.kotlin.jvm")
         plugin("org.jetbrains.kotlin.plugin.spring")
-        plugin("org.jetbrains.kotlin.plugin.noarg")
         plugin("org.jetbrains.kotlin.plugin.jpa")
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
@@ -60,10 +58,6 @@ subprojects {
             jvmTarget = "1.8"
             javaParameters = true
         }
-    }
-
-    noArg {
-        annotation("org.springframework.data.mongodb.core.mapping.Document")
     }
 
     tasks.withType<BootRun> {

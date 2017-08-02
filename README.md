@@ -30,8 +30,6 @@ A simple demo application showcases end-to-end `Functional Reactive Programming 
 1. Gradle 4 (Install via [sdkman](http://sdkman.io/))
 2. Docker for Mac [Setup Instructions](./docs/Docker.md)
 
-> use `./gradlew` instead of `gradle` until 4.0 is released.
-
 ### Build
 ```bash
 # build all 3 executable jars
@@ -75,7 +73,7 @@ docker-compose rm -f
 ### Gradle Commands
 ```bash
 # upgrade project gradle version
-gradle wrapper --gradle-version=4.0
+gradle wrapper --gradle-version=4.0.2
 # gradle daemon status 
 gradle --status
 gradle --stop
@@ -86,3 +84,4 @@ gradle --stop
 * [Stéphane Nicoll](https://github.com/snicoll-demos/demo-webflux-streaming)
 * [Daniel Fernández](https://github.com/danielfernandez/reactive-matchday)
 * [Stathis Souris](https://ssouris.github.io/2017/06/02/petclinic-spring-5-kotlin-reactive-mongodb.html)
+* https://github.com/kbastani/service-block-samples
