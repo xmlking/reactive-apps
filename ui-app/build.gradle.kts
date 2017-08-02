@@ -1,7 +1,8 @@
 import com.palantir.gradle.docker.DockerExtension
 import org.gradle.jvm.tasks.Jar
 
-val reactorKotlinExtensions by project
+val bootstrapVersion by project
+val highchartsVersion by project
 
 apply {
     plugin("com.palantir.docker")
@@ -26,10 +27,9 @@ dependencies {
 
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 //    compile("org.thymeleaf.extras:thymeleaf-extras-java8time")
-    runtime("org.webjars:bootstrap:3.3.7")
-    runtime("org.webjars:highcharts:5.0.8")
+    runtime("org.webjars:bootstrap:$bootstrapVersion")
+    runtime("org.webjars:highcharts:$highchartsVersion")
 
-    compile("io.projectreactor:reactor-kotlin-extensions:$reactorKotlinExtensions")
     testCompile("io.projectreactor:reactor-test")
 
     compile("com.fasterxml.jackson.module:jackson-module-kotlin")

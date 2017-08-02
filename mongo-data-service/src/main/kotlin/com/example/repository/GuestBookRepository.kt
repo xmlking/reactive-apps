@@ -24,9 +24,9 @@ class  GuestBookRepository(val template: ReactiveMongoTemplate,
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
     fun initData() {
-        if (! template.collectionExists(GuestBookEntry::class.java).block()) {
+        if (!template.collectionExists(GuestBookEntry::class.java).block()!!) {
             // Create collection with capped = true
-            template.createCollection(GuestBookEntry::class.java, CollectionOptions(1024 * 1024, 100, true)).block()
+            template.createCollection(GuestBookEntry::class.java,  CollectionOptions.empty().maxDocuments(100L).size(1_048_576L).capped()).block()
 
             // Initialize Data
             val guestBookResource = ClassPathResource("data/guestbook.json")

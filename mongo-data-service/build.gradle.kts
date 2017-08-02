@@ -1,8 +1,6 @@
 import com.palantir.gradle.docker.DockerExtension
 import org.gradle.jvm.tasks.Jar
 
-val reactorKotlinExtensions by project
-
 apply {
     plugin("com.palantir.docker")
 }
@@ -27,7 +25,6 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
     runtime("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
 
-    compile("io.projectreactor:reactor-kotlin-extensions:$reactorKotlinExtensions")
     testCompile("io.projectreactor:reactor-test")
 
     compile("com.fasterxml.jackson.module:jackson-module-kotlin")

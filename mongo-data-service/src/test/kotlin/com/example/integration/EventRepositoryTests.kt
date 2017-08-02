@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.data.domain.Sort.Direction.ASC
 import org.springframework.data.domain.Sort.Order
-import reactor.core.publisher.test
+import reactor.test.test
 import java.time.Duration
 
 
@@ -21,7 +21,7 @@ class EventRepositoryTests : AbstractIntegrationTests() {
     @Test
     fun `Count users correctly`() {
         val eventCount = eventRepository.count().block(Duration.ofSeconds(2))
-            assertEquals(eventCount, 6)
+            assertEquals(eventCount, 6L)
     }
 
     @Test
@@ -29,7 +29,7 @@ class EventRepositoryTests : AbstractIntegrationTests() {
         val events = eventRepository.findAll(Sort.by(Order(ASC, "current")))
         events
                 .test()
-                .expectNextCount(6)
+                .expectNextCount(6L)
                 .verifyComplete()
     }
 
