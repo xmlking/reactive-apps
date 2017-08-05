@@ -125,7 +125,7 @@ fun main(args: Array<String>) {
 }
 
 
-// Start without spring boot
+// Programmatic bootstrap - Start without spring boot
 //fun main(args: Array<String>) {
 //    val quoteGenerator =  QuoteGenerator();
 //    val quoteHandler =  QuoteHandler(quoteGenerator);

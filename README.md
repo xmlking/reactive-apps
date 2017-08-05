@@ -84,4 +84,8 @@ gradle --stop
 * [Stéphane Nicoll](https://github.com/snicoll-demos/demo-webflux-streaming)
 * [Daniel Fernández](https://github.com/danielfernandez/reactive-matchday)
 * [Stathis Souris](https://ssouris.github.io/2017/06/02/petclinic-spring-5-kotlin-reactive-mongodb.html)
-* https://github.com/kbastani/service-block-samples
+* [Sébastien Deleuze](https://github.com/sdeleuze/spring-kotlin-functional) 
+
+### TODO
+* [spring-kotlin-functional](https://github.com/sdeleuze/spring-kotlin-functional)
+* [service-blocks](https://github.com/kbastani/service-block-samples)

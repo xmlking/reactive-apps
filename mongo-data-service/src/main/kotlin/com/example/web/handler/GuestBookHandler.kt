@@ -5,7 +5,6 @@ import com.example.repository.GuestBookRepository
 import com.example.util.json
 import com.example.util.jsonStream
 import com.example.util.textStream
-import org.springframework.http.MediaType.*
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse.ok
