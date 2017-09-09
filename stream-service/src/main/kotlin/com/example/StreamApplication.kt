@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType.APPLICATION_STREAM_JSON
 import org.springframework.http.MediaType.TEXT_EVENT_STREAM
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse.ok
 import org.springframework.web.reactive.function.server.router
@@ -25,44 +26,54 @@ import kotlin.coroutines.experimental.buildSequence
 @SpringBootApplication
 class StreamApplication
 
+// TODO: Kotlin Functional bean declaration DSL
+// https://stackoverflow.com/questions/45935931/how-to-use-functional-bean-definition-kotlin-dsl-with-spring-boot-and-spring-w/46033685#46033685
+//fun beans() = beans {
+//    bean {
+//        QuoteRoutes(it.ref())
+//    }
+//}
+
 @Configuration
-class QuoteRoutes(val quoteHandler: QuoteHandler) {
+class QuoteRoutes(val streamHandler: StreamHandler) {
 
     @Bean
     fun quoteRouter() = router {
         GET("/sse/quotes").nest {
-            accept(TEXT_EVENT_STREAM, quoteHandler::fetchQuotesSSE)
-            accept(APPLICATION_STREAM_JSON, quoteHandler::fetchQuotes)
+            accept(TEXT_EVENT_STREAM, streamHandler::fetchQuotesSSE)
+            accept(APPLICATION_STREAM_JSON, streamHandler::fetchQuotes)
         }
         GET("/sse/fibonacci").nest {
-            accept(TEXT_EVENT_STREAM, quoteHandler::fetchFibonacciSSE)
-            accept(APPLICATION_STREAM_JSON, quoteHandler::fetchFibonacci)
+            accept(TEXT_EVENT_STREAM, streamHandler::fetchFibonacciSSE)
+            accept(APPLICATION_STREAM_JSON, streamHandler::fetchFibonacci)
         }
     }
 
 }
 
 @Component
-class QuoteHandler(val quoteGenerator: QuoteGenerator) {
+class StreamHandler(val quoteGenerator: QuoteGenerator) {
+    final val quoteStream = quoteGenerator.fetchQuoteStream(ofMillis(200)).share()
+    final val fibonacciStream= quoteGenerator.fetchFibonacciStream(ofMillis(1000)).share();
 
     fun fetchQuotesSSE(req: ServerRequest) = ok()
             .contentType(TEXT_EVENT_STREAM)
-            .body(quoteGenerator.fetchQuoteStream(ofMillis(200)), Quote::class.java)
+            .body(quoteStream, Quote::class.java)
 
     fun fetchQuotes(req: ServerRequest) = ok()
             .contentType(APPLICATION_STREAM_JSON)
-            .body(quoteGenerator.fetchQuoteStream(ofMillis(200)), Quote::class.java)
+            .body(quoteStream, Quote::class.java)
 
     fun fetchFibonacciSSE(req: ServerRequest) = ok()
             .contentType(TEXT_EVENT_STREAM)
-            .body(quoteGenerator.fetchFibonacciStream(ofMillis(1000)), String::class.java)
+            .body(fibonacciStream, String::class.java)
 
     fun fetchFibonacci(req: ServerRequest) = ok()
             .contentType(APPLICATION_STREAM_JSON)
-            .body(quoteGenerator.fetchFibonacciStream(ofMillis(1000)), String::class.java)
+            .body(fibonacciStream, String::class.java)
 }
 
-@Component
+@Service
 class QuoteGenerator {
 
     val mathContext = MathContext(2)
@@ -86,8 +97,7 @@ class QuoteGenerator {
                 (index + 1) % prices.size
             }).zipWith(Flux.interval(period))
             .map { it.t1.copy(instant = Instant.now()) }
-            .share()
-            .log()
+            .log("ss-QuoteGenerator")
 
 
     private fun updateQuote(quote: Quote) = quote.copy(
@@ -96,7 +106,7 @@ class QuoteGenerator {
     )
 
 
-    val fibonacci =  buildIterator {
+    val fibonacci= buildIterator {
 
         var a = 0L
         var b = 1L
@@ -112,8 +122,7 @@ class QuoteGenerator {
     fun fetchFibonacciStream(interval: Duration) = fibonacci.toFlux()
             .delayElements(interval)
             .map{it.toString()}
-            .share()
-            .log()
+            .log("ss-fibonacci")
 
 }
 
@@ -122,6 +131,10 @@ class QuoteGenerator {
 
 fun main(args: Array<String>) {
     SpringApplication.run(StreamApplication::class.java, *args)
+//    SpringApplication(Application::class.java).apply {
+//        addInitializers(beans())
+//        run(*args)
+//    }
 }
 
 

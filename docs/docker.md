@@ -16,7 +16,7 @@ docker rmi  eb46b3df6e36
 docker rmi  eb46b3df6e36 -f
 # To run an image 
 docker run -p 8081:8081 -i -t reactive/mongo-data-service:0.1.0-SNAPSHOT
-docker run -p 8082:8082 -it reactive/stream-service:0.1.0-SNAPSHOT
+docker run -p 8082:8082 --name stream-service -it reactive/stream-service:0.1.0-SNAPSHOT
 docker start -p 8082:8082 -it reactive/stream-service:0.1.0-SNAPSHOT
 docker run -p 8080:8080 -e "app.mongoApiUrl=http://localhost:8081"  -e "app.streamApiUrl=http://localhost:8082" -i -t reactive/ui-app:0.1.0-SNAPSHOT
 # Using Spring Profiles
@@ -29,6 +29,10 @@ docker ps
 docker stop 81c723d22865
 # SSH to the running container (CONTAINER ID from `docker ps` command)
 docker exec -i <CONTAINER ID> sh
+# To check logs
+docker logs stream-service
+# inspect a docker image
+docker inspect confluentinc/ksql-cli
 ```
 
 ##### Docker Compose
@@ -45,6 +49,16 @@ docker-compose scale stream=3
 docker-compose stop
 # 2. remove the stopped containers using
 docker-compose rm -f
+# connect(ssh) to a service and run a command
+docker-compose exec -it mongo mongod
+# see logs of a service 
+docker-compose logs -f mongo
+# start specific docker-compose file
+docker-compose  -f docker-compose-all.yml up
+# just start only a single service
+docker-compose  -f docker-compose-all.yml up stream
+# restart single service
+docker-compose  -f docker-compose-all.yml restart stream
 ```
 
 ### Maintenance

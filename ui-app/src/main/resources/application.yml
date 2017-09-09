@@ -1,0 +1,22 @@
+server:
+  port: ${PORT:8080}
+#logging:
+#  level:
+#    root: debug
+management:
+  security:
+    enabled: false
+spring:
+  application:
+    name: ui-app
+app:
+  mongoApiUrl: ${MONGO_API_URL:http://localhost:8081}
+  streamApiUrl: ${STREAM_API_URL:http://localhost:8082}
+
+---
+spring:
+  profiles: docker
+
+---
+spring:
+  profiles: cloud

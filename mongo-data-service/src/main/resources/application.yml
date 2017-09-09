@@ -1,0 +1,40 @@
+server:
+  port: ${PORT:8081}
+#logging:
+#  level:
+#    root: debug
+#    org.springframework.web.reactive.function: INFO
+#    org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
+#    org.springframework.data.mongodb.core.query.Query: DEBUG
+spring:
+  application:
+    name: mongo-data-service
+  data:
+    mongodb:
+      repositories:
+        enabled: false
+
+---
+spring:
+  profiles: docker
+  data:
+    mongodb:
+
+      uri: ${MONGO_URI:mongodb://mongodb:27017}
+      username: ${MONGO_USERNAME:admin}
+      password: ${MONGO_PASSWORD:admin}
+      grid-fs-database: images
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration
+
+---
+spring:
+  profiles: cloud
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://mongodb:27017}
+      username: ${MONGO_USERNAME:admin}
+      password: ${MONGO_PASSWORD:admin}
+      grid-fs-database: images
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration

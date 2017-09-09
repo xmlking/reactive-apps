@@ -14,7 +14,6 @@ class ApiRoutes(val eventHandler: EventHandler,
                 val guestBookHandler: GuestBookHandler,
                 val userHandler: UserHandler) {
     @Bean
-    @DependsOn("databaseInitializer")
     fun apiRouter() = router {
         (accept(APPLICATION_JSON) and "/api").nest {
 

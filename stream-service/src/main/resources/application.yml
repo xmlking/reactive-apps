@@ -1,0 +1,19 @@
+server:
+  port: ${PORT:8082}
+#logging:
+#  level:
+#    root: debug
+spring:
+  application:
+    name: stream-service
+  jackson:
+    serialization:
+      write-date-timestamps-as-nanoseconds: false
+
+---
+spring:
+  profiles: docker
+
+---
+spring:
+  profiles: cloud

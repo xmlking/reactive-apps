@@ -1,0 +1,43 @@
+version: '2'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./infro/mongodb/db:/data/db
+    ports:
+        - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+  mongo:
+    image: reactive/mongo-data-service:0.1.0-SNAPSHOT
+    networks:
+      - reactive-network
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+  stream:
+    image: reactive/stream-service:0.1.0-SNAPSHOT
+    networks:
+      - reactive-network
+  app:
+    image: reactive/ui-app:0.1.0-SNAPSHOT
+    ports:
+      - 8080:8080
+    environment:
+      - app.mongoApiUrl=http://mongo:8080
+      - app.streamApiUrl=http://stream:8080
+    networks:
+      - reactive-network
+    links:
+      - mongo
+      - stream
+    depends_on:
+      - mongo
+      - stream
+networks:
+  reactive-network:
+    driver: bridge

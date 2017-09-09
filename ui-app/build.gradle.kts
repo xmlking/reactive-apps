@@ -3,6 +3,7 @@ import org.gradle.jvm.tasks.Jar
 
 val bootstrapVersion by project
 val highchartsVersion by project
+val webjarsLocatorVersion by project
 
 apply {
     plugin("com.palantir.docker")
@@ -27,6 +28,7 @@ dependencies {
 
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 //    compile("org.thymeleaf.extras:thymeleaf-extras-java8time")
+    runtime("org.webjars:webjars-locator:$webjarsLocatorVersion")
     runtime("org.webjars:bootstrap:$bootstrapVersion")
     runtime("org.webjars:highcharts:$highchartsVersion")
 

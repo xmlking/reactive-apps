@@ -15,15 +15,17 @@ buildscript {
 }
 
 plugins {
-    val kotlinVersion = "1.1.3-2"
+    val kotlinVersion = "1.1.4-3"
     val springDependencyManagement = "1.0.3.RELEASE"
     val springBootVersion = "2.0.0.RELEASE"
     val dockerPluginVersion = "0.13.0"
-    //    id("org.springframework.boot") version springBootVersion apply false TODO
-    id("io.spring.dependency-management") version springDependencyManagement apply false
-    id("org.jetbrains.kotlin.jvm") version kotlinVersion apply false
+
+    base
+    id("org.jetbrains.kotlin.jvm") version kotlinVersion
     id("org.jetbrains.kotlin.plugin.spring") version kotlinVersion apply false
     id("org.jetbrains.kotlin.plugin.jpa") version kotlinVersion apply false
+    //TODO: id("org.springframework.boot") version springBootVersion apply false
+    id("io.spring.dependency-management") version springDependencyManagement apply false
     id("com.palantir.docker") version dockerPluginVersion apply false
 }
 
@@ -53,17 +55,19 @@ subprojects {
         compile("org.springframework.boot:spring-boot-starter-actuator")
     }
 
-    tasks.withType<KotlinCompile>().all {
-        kotlinOptions {
-            jvmTarget = "1.8"
-            javaParameters = true
+    tasks {
+        withType<KotlinCompile>().all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+                freeCompilerArgs = listOf("-Xjsr305-annotations=enable")
+            }
         }
-    }
 
-    tasks.withType<BootRun> {
-        // Ensures IntelliJ can live reload resource files
-        val sourceSets = the<JavaPluginConvention>().sourceSets
-        sourceResources(sourceSets["main"])
+        withType<BootRun> {
+            // Ensures IntelliJ can live reload resource files
+            val sourceSets = the<JavaPluginConvention>().sourceSets
+            sourceResources(sourceSets["main"])
+        }
     }
 
     configure<SpringBootExtension> {

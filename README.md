@@ -66,6 +66,8 @@ docker-compose scale stream=2
 docker-compose stop
 # 2. remove the stopped containers using
 docker-compose rm -f
+# start specific docker-compose file
+docker-compose  -f docker-compose-all.yml up
 ```
 >Access UI App at http://localhost:8080
 
@@ -73,7 +75,7 @@ docker-compose rm -f
 ### Gradle Commands
 ```bash
 # upgrade project gradle version
-gradle wrapper --gradle-version=4.0.2
+gradle wrapper --gradle-version 4.2-rc-1 --distribution-type all
 # gradle daemon status 
 gradle --status
 gradle --stop
