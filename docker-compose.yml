@@ -15,11 +15,14 @@ services:
     environment:
       - app.mongoApiUrl=http://mongo:8080
       - app.streamApiUrl=http://stream:8080
+    networks:
+      - reactive-network
     links:
       - mongo
       - stream
-    networks:
-      - reactive-network
+    depends_on:
+      - mongo
+      - stream
 networks:
   reactive-network:
     driver: bridge

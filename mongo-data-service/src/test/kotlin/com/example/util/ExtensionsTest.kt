@@ -1,12 +1,8 @@
 package com.example.util
 
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
-import org.junit.Assert.*
-
-/**
- * Unit tests for Extensions
- */
 class ExtensionsTest {
 
     @Test

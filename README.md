@@ -75,7 +75,7 @@ docker-compose  -f docker-compose-all.yml up
 ### Gradle Commands
 ```bash
 # upgrade project gradle version
-gradle wrapper --gradle-version 4.2-rc-1 --distribution-type all
+gradle wrapper --gradle-version 4.2-rc-2 --distribution-type all
 # gradle daemon status 
 gradle --status
 gradle --stop

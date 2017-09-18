@@ -2,8 +2,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.dsl.SpringBootExtension
 import org.springframework.boot.gradle.tasks.run.BootRun
 
+val micrometerVersion by project
+
 buildscript {
-    val springBootVersion = "2.0.0.M3"
+    val springBootVersion = "2.0.0.M4"
+    val junitGradleVersion = "1.0.0"
 
     repositories {
         mavenCentral()
@@ -11,6 +14,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+        classpath("org.junit.platform:junit-platform-gradle-plugin:$junitGradleVersion")
     }
 }
 
@@ -34,6 +38,7 @@ subprojects {
     apply {
         plugin("org.jetbrains.kotlin.jvm")
         plugin("org.jetbrains.kotlin.plugin.spring")
+        plugin("org.junit.platform.gradle.plugin")
         plugin("org.jetbrains.kotlin.plugin.jpa")
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
@@ -45,14 +50,22 @@ subprojects {
     }
 
     dependencies {
+        // kotlin
         compile("org.jetbrains.kotlin:kotlin-stdlib-jre8")
         compile("org.jetbrains.kotlin:kotlin-reflect")
-
+        // Web
         compile("org.springframework.boot:spring-boot-starter-webflux")
+        testCompile("org.springframework.boot:spring-boot-starter-test") {
+            exclude(module = "junit")
+        }
+        testCompile("org.junit.jupiter:junit-jupiter-api")
+        testRuntime("org.junit.jupiter:junit-jupiter-engine")
+        testCompile("io.projectreactor:reactor-test")
+        // Tooling
         compileOnly("org.springframework:spring-context-indexer")
         compile("org.springframework.boot:spring-boot-devtools")
-        testCompile("org.springframework.boot:spring-boot-starter-test")
         compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("io.micrometer:micrometer-registry-prometheus:$micrometerVersion")
     }
 
     tasks {

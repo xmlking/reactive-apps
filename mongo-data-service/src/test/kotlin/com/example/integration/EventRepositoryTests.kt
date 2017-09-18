@@ -1,10 +1,8 @@
 package com.example.integration
 
-import org.hamcrest.CoreMatchers.*
 import com.example.repository.EventRepository
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
@@ -39,7 +37,7 @@ class EventRepositoryTests : AbstractIntegrationTests() {
         pagedEvents
                 .test()
                 .consumeNextWith { actual ->
-                    assertThat(actual.current, `is`(true))
+                    assertEquals(actual.current,true)
                     println(actual)
                 }
                 .verifyComplete()

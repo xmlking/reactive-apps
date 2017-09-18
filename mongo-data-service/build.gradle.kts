@@ -25,8 +25,6 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
     runtime("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
 
-    testCompile("io.projectreactor:reactor-test")
-
     compile("com.fasterxml.jackson.module:jackson-module-kotlin")
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 }
