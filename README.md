@@ -80,6 +80,7 @@ docker-compose -f docker-compose-all.yml restart mongodb
 docker-compose -f docker-compose-all.yml up mongodb
 # check health for a service
 docker inspect --format "{{json .State.Health.Status }}" reactiveapps_app_1
+docker ps
 ```
 >Access UI App at http://localhost:8080
 
