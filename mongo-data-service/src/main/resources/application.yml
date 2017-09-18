@@ -6,6 +6,10 @@ server:
 #    org.springframework.web.reactive.function: INFO
 #    org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
 #    org.springframework.data.mongodb.core.query.Query: DEBUG
+endpoints:
+  default:
+    web:
+      enabled: true
 spring:
   application:
     name: mongo-data-service

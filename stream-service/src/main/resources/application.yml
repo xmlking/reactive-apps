@@ -3,6 +3,10 @@ server:
 #logging:
 #  level:
 #    root: debug
+endpoints:
+  default:
+    web:
+      enabled: true
 spring:
   application:
     name: stream-service

@@ -3,9 +3,10 @@ server:
 #logging:
 #  level:
 #    root: debug
-management:
-  security:
-    enabled: false
+endpoints:
+  default:
+    web:
+      enabled: true
 spring:
   application:
     name: ui-app
