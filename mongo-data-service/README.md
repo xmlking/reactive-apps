@@ -25,8 +25,10 @@ gradle mongo-data-service:test
 ### Build
 ```bash
 gradle mongo-data-service:build
+# skip test
+gradle mongo-data-service:build -x test 
 # build docker image
-gradle mongo-data-service:docker
+gradle mongo-data-service:docker -x test 
 ```
 
 ### API

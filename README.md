@@ -37,8 +37,10 @@ gradle build
 # continuous build with `-t`. 
 # this shoud be started before any run tasks i.e., `gradle ui-app:bootRun`, for spring's devtools to work.
 gradle -t build
+# build all 3 apps
+gradle build -x test -x shared:build
 # build all 3 docker images
-gradle docker
+gradle docker -x test -x shared:build
 ```
 
 ### Test
@@ -68,6 +70,16 @@ docker-compose stop
 docker-compose rm -f
 # start specific docker-compose file
 docker-compose  -f docker-compose-all.yml up
+# see logs of a service 
+docker-compose -f docker-compose-all.yml logs  mongodb
+# connect(ssh) to a service and run a command
+docker-compose -f docker-compose-all.yml exec mongodb mongo -u "admin" -p "admin" --authenticationDatabase "admin"
+# restart single service
+docker-compose -f docker-compose-all.yml restart mongodb
+# start single service
+docker-compose -f docker-compose-all.yml up mongodb
+# check health for a service
+docker inspect --format "{{json .State.Health.Status }}" reactiveapps_app_1
 ```
 >Access UI App at http://localhost:8080
 

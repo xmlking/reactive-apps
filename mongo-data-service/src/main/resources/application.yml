@@ -23,10 +23,11 @@ spring:
   profiles: docker
   data:
     mongodb:
-
-      uri: ${MONGO_URI:mongodb://mongodb:27017}
+      host: ${MONGO_HOST:mongodb}
+      port: ${MONGO_PORT:27017}
       username: ${MONGO_USERNAME:admin}
       password: ${MONGO_PASSWORD:admin}
+      authentication-database: ${MONGO_AUTHENTICATION_DATABASE:admin}
       grid-fs-database: images
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration
@@ -36,9 +37,11 @@ spring:
   profiles: cloud
   data:
     mongodb:
-      uri: ${MONGO_URI:mongodb://mongodb:27017}
+      host: ${MONGO_HOST:mongodb}
+      port: ${MONGO_PORT:27017}
       username: ${MONGO_USERNAME:admin}
       password: ${MONGO_PASSWORD:admin}
+      authentication-database: ${MONGO_AUTHENTICATION_DATABASE:admin}
       grid-fs-database: images
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration
